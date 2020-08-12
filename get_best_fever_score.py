@@ -1,7 +1,6 @@
 import numpy as np
 
-myBoardNums = [6,10,6,7,15,9,7,3,4,8]
-
+myBoardNums = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5]
 
 import time
 class FeverBoard:
@@ -9,18 +8,20 @@ class FeverBoard:
         self.nums = nums
         self.threshold_value = 0
 
-    def get_best_fever_score(self):
+    def get_best_fever_score(self, threshold_ceiling=10000):
         my_nums = np.sort(self.nums)
-        j = 0
-        while j < len(my_nums) - 1:
-            if my_nums[j] == my_nums[j + 1] and 2 * my_nums[j] > my_nums[-1]:
+        j = len(my_nums) - 2
+        while j >= 0:
+            if my_nums[j] == my_nums[j + 1] and my_nums[j] + 2 > my_nums[-1]:
                 my_nums = np.delete(my_nums, [j, j + 1])
                 j = j - 1
-            j = j + 1
+            j = j - 1
         my_value = self.get_best_fever_score_recurse(my_nums, False, 0, 0)
         while my_value > self.threshold_value:
-            print("Could not meet the score of " + str(self.threshold_value) + ". Incrementing.")
+            # print("Could not meet the score of " + str(self.threshold_value) + ". Incrementing.")
             self.threshold_value += 1
+            if self.threshold_value > threshold_ceiling:
+                return 10000
             my_value = self.get_best_fever_score_recurse(my_nums, False, 0, 0)
         return my_value
 
@@ -44,12 +45,12 @@ class FeverBoard:
                     if my_accumulated_score > self.threshold_value:
                         continue
                     temp_nums = np.sort(np.insert(temp_nums, 0, my_nums[i] - my_nums[0]))
-                    j = 0
-                    while j < len(temp_nums) - 1:
-                        if temp_nums[j] == temp_nums[j + 1] and 2 * temp_nums[j] > temp_nums[-1]:
+                    j = len(temp_nums) - 2
+                    while j >= 0:
+                        if temp_nums[j] == temp_nums[j + 1] and temp_nums[j] + 2 > temp_nums[-1]:
                             temp_nums = np.delete(temp_nums, [j, j + 1])
                             j = j - 1
-                        j = j + 1
+                        j = j - 1
                 other_score = self.get_best_fever_score_recurse(temp_nums, tile_is_saved, depth + 1,
                                                                 my_accumulated_score)
 

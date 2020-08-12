@@ -14,7 +14,7 @@ import pprint
 import heapq
 import copy
 
-
+from fetch_daily_board import fetch_daily_board, fetch_board, fetch_weekly_board
 
 X=6
 Y=8
@@ -22,8 +22,8 @@ SIZE=X*Y
 
 
 #test
-CUT=40
-MAX_BRANCH_POOL=20000
+CUT=60
+MAX_BRANCH_POOL=10000
 
 
 FEVER=10
@@ -212,10 +212,9 @@ if __name__=="__main__":
 	# 	  9,  4,  6,  9,  2, 11,
 	# 	 10, 11,  1,  9, 11, 11
 	# 	], dtype=np.byte), SIZE, 0)
+	# print(fetch_board(board_seed=173501377, board_type="f"))
 	game_board=r_board(np.array(
-		[10, 15, 10,  5, 13, 11,  2,  4,  1, 11, 13,  7,  4,  1,  7,  5, 13,
-        5,  1,  7,  8,  7, 10, 15, 13,  6, 14,  3,  1, 10,  1,  7,  7,  2,
-       13, 10,  9, 15,  6,  2,  5,  6,  9,  2, 10,  4, 11, 10], dtype=np.byte), SIZE, 0)
+		fetch_weekly_board(), dtype=np.byte), SIZE, 0)
 	# game_board=r_board(np.array(
 	# 	[
 	# 	 1,2,
