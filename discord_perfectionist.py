@@ -39,4 +39,4 @@ async def on_message(message):
 if __name__ == "__main__":
     # Contact/message me if you need this token. This is the API token
     # for the Discord bot.
-    client.run(os.environ.get('BOT_TOKEN'))
+    client.run(str(os.environ.get('BOT_TOKEN')))

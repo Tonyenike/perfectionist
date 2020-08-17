@@ -273,7 +273,7 @@ class PerfectionistBoard:
             prev_score = 10000
 
             for move, move_idx, score in moves_sorted_by_evaluation:
-                print(move)
+                #print(move)
                 #print(score)
                 #print(current_pool[move_idx].try_move(move))
                 #print(move_idx)
