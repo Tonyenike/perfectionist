@@ -214,7 +214,7 @@ if __name__=="__main__":
 	# 	], dtype=np.byte), SIZE, 0)
 	# print(fetch_board(board_seed=173501377, board_type="f"))
 	game_board=r_board(np.array(
-		fetch_weekly_board(), dtype=np.byte), SIZE, 0)
+		fetch_daily_board(), dtype=np.byte), SIZE, 0)
 	# game_board=r_board(np.array(
 	# 	[
 	# 	 1,2,

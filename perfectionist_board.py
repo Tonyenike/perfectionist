@@ -193,7 +193,7 @@ class PerfectionistBoard:
                 move_score += right_tile
                 move_score += new_board.evaluate_move([left_tile_index, right_tile_index], new_board) - 2 * left_tile
             if tile == 1:
-                move_score += 10
+                move_score += 1
         if new_board.lost - board_object.lost == 0:
             move_score += 2 * board_object.board[move[0]]
         #move_score -= 4 * new_board.lost
@@ -237,6 +237,7 @@ class PerfectionistBoard:
         current_pool = [self]
         iterations = 0
         local_branch_limit = 3
+        my_prev_score = 10000
         while len(current_pool):
             print("Pool size is: " + str(len(current_pool)))
             iterations += 1
@@ -272,8 +273,10 @@ class PerfectionistBoard:
             prev_score = 10000
 
             for move, move_idx, score in moves_sorted_by_evaluation:
+                print(move)
                 #print(score)
                 #print(current_pool[move_idx].try_move(move))
+                #print(move_idx)
                 if not (score == prev_score) and i > local_branch_limit:
                     break
                 i += 1
@@ -323,7 +326,7 @@ class PerfectionistBoard:
 
 
 if __name__ == "__main__":
-    game_board = fetch_weekly_board(2)
+    game_board = fetch_daily_board(2)
     print(game_board)
 
     my_perf_board = PerfectionistBoard(game_board)
@@ -333,4 +336,5 @@ if __name__ == "__main__":
     #        [44, 46], [11, 19], [32, 5], [25, 5], [23, 43], [1, 20], [5, 27]]
     # path = [[1, 7], [6, 8], [15, 21], [30, 36], [26, 34], [22, 28], [9, 18], [18, 24], [12, 42], [37, 27], [25, 27], [38, 0], [0, 2], [41, 44], [43, 44], [17, 31], [19, 31], [23, 11], [10, 11], [40, 39], [4, 16], [39, 45], [32, 20], [13, 29], [5, 46], [33, 47], [35, 20], [3, 20], [14, 20]]
     #path = [[22, 23], [23, 9], [16, 28], [24, 30], [12, 13], [0, 1], [35, 41], [9, 10], [36, 42], [4, 10], [15, 14], [8, 14], [2, 20], [7, 6], [18, 6], [6, 11], [3, 21], [46, 47], [29, 47], [31, 25], [25, 37], [5, 17], [26, 27], [27, 33], [39, 44], [34, 45], [32, 43], [19, 40], [38, 38]]
+    #path=[[8, 39], [33, 39], [38, 40], [21, 27], [29, 22], [20, 22], [43, 7], [7, 13], [17, 16], [15, 16], [10, 28], [11, 23], [41, 47], [35, 47], [0, 1], [30, 36], [1, 19], [14, 2], [2, 31], [31, 32], [25, 37], [24, 26], [26, 46], [45, 46], [4, 42], [3, 12], [18, 34], [9, 44], [34, 5], [5, 6]]
     #my_perf_board.export_move_sequence_html(path)

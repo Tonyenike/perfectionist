@@ -1,12 +1,15 @@
 import discord
 from perfectionist_board import PerfectionistBoard
+import os
 from fetch_daily_board import fetch_daily_board, fetch_board, fetch_weekly_board
 
 client = discord.Client()
 
+
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
+
 
 @client.event
 async def on_message(message):
@@ -34,4 +37,6 @@ async def on_message(message):
 
 
 if __name__ == "__main__":
-    client.run('NzM0NzU5OTMzNzQ4NDQ1Mjk2.XxWYgw.jlhkf0Kv2WUFpPx0yLsl6XJmrGc')
+    # Contact/message me if you need this token. This is the API token
+    # for the Discord bot.
+    client.run(os.environ.get('BOT_TOKEN'))
