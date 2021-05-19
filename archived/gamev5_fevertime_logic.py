@@ -2,7 +2,7 @@
 
 # expand everything
 
-from gamev4 import global_pool
+from board import global_pool
 
 
 class r_board:
